@@ -56,31 +56,33 @@ if difficulty == "easy":
         randomizer = random.randint(1, 80)
 
         # ensures that equations are randomized via true or false equations
-        equation = random.choice(tf_list)
+        equation = random.choice(tf_list[:-1])
         response = tf_list
 
         # displays true equations randomly
         if equation == "true":
 
             if 1 < randomizer < 20:
-                choice_checker(f" {integer_1} + {integer_2} ={integer_1 + integer_2} (spoiler {equation}){rounds_played}"
-                               f"| True or False?", tf_list, "please enter true or false")
+                choice_checker(
+                    f" {integer_1} + {integer_2} ={integer_1 + integer_2} (spoiler {equation}){rounds_played}"
+                    f"| True or False?", tf_list, "please enter true or false")
             elif 21 < randomizer < 60:
-                choice_checker(f" {integer_3} - {integer_4} ={integer_3 - integer_4} (spoiler {equation}){rounds_played}"
-                               f"| True or False?", tf_list, "please enter true or false")
+                choice_checker(
+                    f" {integer_3} - {integer_4} ={integer_3 - integer_4} (spoiler {equation}){rounds_played}"
+                    f"| True or False?", tf_list, "please enter true or false")
             else:
                 choice_checker(f" {integer_9} + {integer_10} > "
                                f"{integer_11} + {integer_12} (spoiler {equation}){rounds_played}"
                                f"| True or False?", tf_list, "please enter true or false")
 
         # displays false equations randomly
-        elif equation == "false":
+        if equation == "false":
             if 1 < randomizer < 40:
-                choice_checker(f" {integer_5} + {integer_6} ={integer_4 + integer_6} (spoiler {equation}) {rounds_played}"
-                               f"| True or False?", tf_list, "please enter true or false")
-            else:
-                choice_checker(f" {integer_7} - {integer_8} ={integer_3 - integer_8} (spoiler {equation}) {rounds_played}"
-                               f"| True or False?", tf_list, "please enter true or false")
+                choice_checker(
+                    f" {integer_5} + {integer_6} ={integer_4 + integer_6} (spoiler {equation}) {rounds_played}"
+                    f"| True or False?", tf_list, "please enter true or false")
+        else:
+            choice_checker(f" {integer_7} - {integer_8} ={integer_3 - integer_8} (spoiler {equation}) {rounds_played}"
+                           f"| True or False?", tf_list, "please enter true or false")
 
-        rounds_played + 1
-
+        rounds_played += 1
