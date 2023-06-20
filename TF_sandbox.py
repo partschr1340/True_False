@@ -1,29 +1,24 @@
 # Online Python compiler (interpreter) to run Python online.# Functions
 import random
 
-print("=====WELCOME TO THE TRUE OR FALSE QUIZ (I recommend making the screen bigger) =====")
+print("=====WELCOME TO THE TRUE OR FALSE QUIZ =====")
 
 
 # Instructions
 def instructions():
     print("~~~~~~INSTRUCTIONS~~~~~~~")
-    print()
     print("- You will choose your own difficulty (easy | medium | hard")
     print("- The difficulty you choose will influence the type of questions there are.")
     print(
         "- You will then choose the amount of rounds you want to play at this difficulty or press <enter> for infinite "
         "mode.")
-    print()
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    print()
     print("- Easy will include simple addition and subtraction.")
     print("- Medium will include some harder addition and subtraction, as well as some ")
     print("  multiplication and division.")
     print("- Hard will include all the above with much harder difficulty.")
     print("- All difficulties will include greater than or less than questions (<, >, =)")
-    print()
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-    print()
     print("- Equations will then be generated and you will have to find out if they are")
     print("  true or false")
     print("~~~~~~~Have fun!!!~~~~~~~~~")
@@ -44,7 +39,6 @@ def choice_checker(question, valid_list, error):
         print(error)
 
 
-# rounds component
 def rounds_checker():
     while True:
         rounds_amount = input("How many rounds would you like to play?")
@@ -106,6 +100,7 @@ if difficulty == "easy":
     while end_game == "no":
 
         # random integers for equation generators
+
         integer_1 = (random.randint(50, 100))
         integer_2 = (random.randint(50, 100))
         integer_3 = (random.randint(50, 100))
@@ -169,9 +164,7 @@ if difficulty == "easy":
         # displays a message if user got it right
         if user_choice == equation:
             print(f" you got it, nice! 👍👍| correct {rounds_won + 1}| incorrect {rounds_lost}")
-            print()
             print("==========================================")
-            print()
             rounds_won += 1
 
         # end game code, only display chicken if user decided to end game on regular mode
@@ -188,10 +181,8 @@ if difficulty == "easy":
 
         # displays an incorrect message if user gets it incorrect
         else:
-            print(f"incorrect !! ❌❌|correct {rounds_won}| incorrect {rounds_lost + 1}")
-            print()
+            print(f"incorrect !! ❌|❌|correct {rounds_won}| incorrect {rounds_lost + 1}")
             print("==========================================")
-            print()
             rounds_lost += 1
 
         # once the user reaches desired amount of rounds, ask if they want to continue.
