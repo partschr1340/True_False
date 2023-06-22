@@ -177,12 +177,28 @@ if difficulty == "easy":
         # end game code, only display chicken if user decided to end game on regular mode
         elif user_choice == "xxx":
             if mode == "infinite":
-                print("~ Bye bye!")
-                end_game = "yes"
-                break
+                if rounds_played == 0:
+                    print("~ Bye bye!")
+                    end_game = "yes"
+                    break
+                else:
+                    print()
+                    print("==========================================")
+                    print()
+                    print(f"you got {rounds_won} correct!!")
+                    print(f"and you got {rounds_lost} incorrect!!")
+                    print()
+                    print("~Bye bye")
+                    end_game = "yes"
+                    break
 
             else:
                 print("🐔🐔🐔You chickened out!!🐔🐔🐔")
+                print()
+                print("==========================================")
+                print()
+                print(f"you got {rounds_won} correct!!")
+                print(f"you got {rounds_lost} incorrect!!")
                 end_game = "yes"
                 break
 
@@ -200,6 +216,7 @@ if difficulty == "easy":
                                         f" would you like to continue?", yes_no_list, "please enter yes or no")
             # if yes, every 10 rounds ask if they wish to
             if play_again == "yes":
+                mode = "infinite"
                 if rounds_played == rounds + 10:
                     play_again()
                     continue
