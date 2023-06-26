@@ -1,24 +1,29 @@
 # Online Python compiler (interpreter) to run Python online.# Functions
 import random
 
-print("=====WELCOME TO THE TRUE OR FALSE QUIZ =====")
+print("=====WELCOME TO THE TRUE OR FALSE QUIZ (I recommend making the screen bigger) =====")
 
 
 # Instructions
 def instructions():
     print("~~~~~~INSTRUCTIONS~~~~~~~")
+    print()
     print("- You will choose your own difficulty (easy | medium | hard")
     print("- The difficulty you choose will influence the type of questions there are.")
     print(
         "- You will then choose the amount of rounds you want to play at this difficulty or press <enter> for infinite "
         "mode.")
+    print()
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    print()
     print("- Easy will include simple addition and subtraction.")
     print("- Medium will include some harder addition and subtraction, as well as some ")
     print("  multiplication and division.")
     print("- Hard will include all the above with much harder difficulty.")
     print("- All difficulties will include greater than or less than questions (<, >, =)")
+    print()
     print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+    print()
     print("- Equations will then be generated and you will have to find out if they are")
     print("  true or false")
     print("~~~~~~~Have fun!!!~~~~~~~~~")
@@ -39,6 +44,7 @@ def choice_checker(question, valid_list, error):
         print(error)
 
 
+# rounds component
 def rounds_checker():
     while True:
         rounds_amount = input("How many rounds would you like to play?")
@@ -62,8 +68,9 @@ def rounds_checker():
 # lists for checking responses
 yes_no_list = ["yes", "no"]
 tf_list = ["true", "false", "xxx"]
-dif_list = ["medium", "hard", "easy"]
-
+dif_list = ["hard", "medium", "easy"]
+tf_error = "please enter true or false"
+yes_no_error = "please enter yes or no"
 # Ask user if they have played game before, if yes continue, if no display instructions
 played_before = choice_checker("~~Do you know how the quiz works?", yes_no_list, "~~Please enter yes or no~~")
 
@@ -90,32 +97,29 @@ rounds_played = 0
 rounds_won = 0
 rounds_lost = 0
 
+# in game messages
+end_game_message = "You got {} correct✅✅ | You also got {} incorrect❌❌\n"
+play_again = f"you've played {rounds} rounds would you like to continue?"
+incorrect = "incorrect !! ❌❌|correct {}| incorrect {}\n"
+correct = "you got it, nice! 👍👍| correct {}| incorrect {}\n"
+
 # states how many rounds the user has chosen
 print(f"{rounds} rounds | {mode} mode")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
 end_game = "no"
+# easy mode
 if difficulty == "easy":
 
-    while end_game == "no":
-
+    while True:
         # random integers for equation generators
-
         integer_1 = (random.randint(50, 100))
         integer_2 = (random.randint(50, 100))
-        integer_3 = (random.randint(50, 100))
-        integer_4 = (random.randint(50, 100))
-        integer_5 = (random.randint(50, 100))
-        integer_6 = (random.randint(50, 100))
-        integer_7 = (random.randint(50, 100))
-        integer_8 = (random.randint(50, 100))
-        integer_9 = (random.randint(75, 100))
-        integer_10 = (random.randint(75, 100))
-        integer_11 = (random.randint(50, 74))
-        integer_12 = (random.randint(50, 74))
+        integer_3 = (random.randint(75, 100))
+        integer_4 = (random.randint(75, 100))
 
         # randomizes questions so that it spread equally ( +, -, <, >)
-        randomizer = random.randint(1, 80)
+        randomizer = random.randint(1, 60)
 
         # ensures that equations are randomized via true or false equations
         equation = random.choice(tf_list[:-1])
@@ -127,73 +131,88 @@ if difficulty == "easy":
                 user_choice = choice_checker(
                     f"round {rounds_played + 1} |"
                     f" {integer_1} + {integer_2} ={integer_1 + integer_2}"
-                    f" (spoiler {equation}) | True or False?", tf_list, "please enter true or false")
+                    f" (spoiler {equation}) | True or False?", tf_list, tf_error)
 
                 rounds_played += 1
 
-            elif 21 < randomizer < 60:
+            elif 21 < randomizer < 40:
                 user_choice = choice_checker(
                     f"round {rounds_played + 1} |"
-                    f" {integer_3} - {integer_4} ={integer_3 - integer_4} "
-                    f"(spoiler {equation}) | True or False?", tf_list, "please enter true or false")
+                    f" {integer_1} - {integer_2} ={integer_1 - integer_2} "
+                    f"(spoiler {equation}) | True or False?", tf_list, tf_error)
                 rounds_played += 1
 
             else:
                 user_choice = choice_checker(
                     f"round {rounds_played + 1} |"
-                    f" {integer_9} + {integer_10} > {integer_11} + {integer_12} "
-                    f"(spoiler {equation}) | True or false?", tf_list, "please enter true or false")
+                    f" {integer_3} + {integer_4} > {integer_3 - 59} + {integer_4 - 57} "
+                    f"(spoiler {equation}) | True or false?", tf_list, tf_error)
                 rounds_played += 1
 
         # displays false equations randomly
         elif equation == "false":
-            if 1 < randomizer < 40:
+            if 1 < randomizer < 20:
                 user_choice = choice_checker(
                     f"round {rounds_played + 1} |"
-                    f" {integer_5} + {integer_6} ={integer_4 + integer_6} (spoiler {equation})"
-                    f"| True or False?", tf_list, "please enter true or false")
+                    f" {integer_1} + {integer_2} ={integer_4 + integer_3} (spoiler {equation})"
+                    f"| True or False?", tf_list, tf_error)
+                rounds_played += 1
+
+            elif 21 < randomizer < 40:
+                user_choice = choice_checker(
+                    f"round {rounds_played + 1} | "
+                    f"{integer_1} - {integer_2} ={integer_3 - integer_4} (spoiler {equation})"
+                    f"| True or False?", tf_list, tf_error)
                 rounds_played += 1
 
             else:
                 user_choice = choice_checker(
                     f"round {rounds_played + 1} | "
-                    f"{integer_7} - {integer_8} ={integer_3 - integer_8} (spoiler {equation})"
-                    f"| True or False?", tf_list, "please enter true or false")
+                    f"{integer_3} + {integer_4} < {random.randint(50, 74)} + {random.randint(50, 74)}"
+                    f" (spoiler {equation})"
+                    f"| True or False?", tf_list, tf_error)
                 rounds_played += 1
 
         # displays a message if user got it right
         if user_choice == equation:
-            print(f" you got it, nice! 👍👍| correct {rounds_won + 1}| incorrect {rounds_lost}")
-            print("==========================================")
+            print(correct.format(rounds_won + 1, rounds_lost + 1))
+            print("==========================================\n")
             rounds_won += 1
 
         # end game code, only display chicken if user decided to end game on regular mode
         elif user_choice == "xxx":
             if mode == "infinite":
-                print("~ Bye bye!")
-                end_game = "yes"
-                break
+                if rounds_played == 0:
+                    print("~ Bye bye!")
+                    end_game = "yes"
+                    break
+                else:
+                    print("\n==========================================")
+                    print(end_game_message)
+                    print("~Bye bye")
+                    end_game = "yes"
+                    break
 
             else:
-                print("🐔🐔🐔You chickened out!!🐔🐔🐔")
+                print("🐔🐔🐔You chickened out!!🐔🐔🐔\n")
+                print("==========================================\n")
+                print(end_game_message.format(rounds_won, rounds_lost))
                 end_game = "yes"
                 break
 
         # displays an incorrect message if user gets it incorrect
         else:
-            print(f"incorrect !! ❌|❌|correct {rounds_won}| incorrect {rounds_lost + 1}")
-            print("==========================================")
+            print("incorrect !! ❌❌|correct {}| incorrect {}\n")
+            print("==========================================\n")
             rounds_lost += 1
 
         # once the user reaches desired amount of rounds, ask if they want to continue.
         if rounds_played == rounds:
-            play_again = choice_checker(f"you've played {rounds} rounds |"
-                                        f" would you like to continue?", yes_no_list, "please enter yes or no")
+            choice_checker(play_again, yes_no_list, yes_no_error)
             # if yes, every 10 rounds ask if they wish to
             if play_again == "yes":
-                if rounds_played == rounds + 10:
-                    play_again()
-                    continue
+                mode = "infinite"
+                continue
 
             # once user reaches desired amount of rounds, display choice whether
             # they want to level up to higher difficulty or end game.
@@ -206,10 +225,63 @@ if difficulty == "easy":
                 if level_up == "yes":
                     dif_change = choice_checker("~ medium or hard ~", dif_list[:-1],
                                                 "please enter medium or hard")
-
                 # ends game if user decides not to level up
                 else:
-                    print()
-                    print("you chose not to level up | Bye bye!👋👋")
+                    print("\nyou chose not to level up | Bye bye!👋👋")
                     end_game = "yes"
                     break
+
+# Medium difficulty
+if difficulty or dif_change == "medium":
+    while True:
+        # Random integers for equations
+        int_1 = random.randint(30, 80)
+        int_2 = random.randint(15, 30)
+
+        # randomizes whether equation printed is a true or false equation
+        equation = random.choice(tf_list[:-1])
+
+        # displays true multiplication equations
+        if equation == "true":
+            user_choice = choice_checker(f"round {rounds_played + 1} |"
+                                         f"{int_1} x {int_2} = {int_2 * int_1}"
+                                         f" | True or False? (spoiler True)", tf_list, tf_error)
+            rounds_played += 1
+
+        # displays false multiplication equations
+        elif equation == "false":
+            user_choice = choice_checker(f"round {rounds_played + 1} |"
+                                         f"{int_1} x {int_2} = {random.randint(30, 50) ** 2}"
+                                         f" | True or False? (spoiler False)", tf_list, tf_error)
+            rounds_played += 1
+
+        # print correct message if user gets answer correct
+        if user_choice == equation:
+            print(correct.format(rounds_won + 1, rounds_lost))
+            print("==========================================\n")
+            rounds_won += 1
+
+        # ends the game if user types xxx (only displays chicken if user ends game without
+        # infinite rounds
+        elif user_choice == "xxx":
+            if mode == "infinite":
+                print("\n==========================================")
+                print(end_game_message.format(rounds_won, rounds_lost))
+            else:
+                print("\n==========================================")
+                print("🐔🐔🐔You chickened out!!!🐔🐔🐔")
+                print(end_game_message.format(rounds_won, rounds_lost))
+            end_game = "yes"
+            break
+
+        # displays incorrect message
+        else:
+            print(incorrect.format(rounds_won, rounds_lost))
+            print("==========================================\n")
+
+        if rounds_played == rounds:
+            choice_checker(play_again, yes_no_list, yes_no_error)
+            if play_again == "yes":
+                mode = "infinite"
+                continue
+
