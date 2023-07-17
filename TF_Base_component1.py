@@ -2,8 +2,6 @@
 import random
 import math
 
-print("\n➕➖✖➗ WELCOME TO THE TRUE OR FALSE QUIZ ➗✖➖➕")
-
 
 # Instructions
 def instructions():
@@ -41,7 +39,7 @@ def choice_checker(question, valid_list, error):
 def rounds_checker():
     while True:
         rounds_amount = input("How many rounds would you like to play? <enter for infinite rounds>")
-        round_error = "\nPlease enter an integer more than 0 or <enter> for infinite mode"
+        round_error = "Please enter an integer or press <enter> for infinite mode\n"
 
         # If infinite mode not chose, check response is an integer that is more than 0
         if rounds_amount != "":
@@ -64,6 +62,10 @@ tf_list = ["true", "false", "xxx"]
 dif_list = ["hard", "medium", "easy"]
 tf_error = "please enter true or false"
 yes_no_error = "please enter yes or no"
+
+# introduction message
+print("\n➕➖✖➗ WELCOME TO THE TRUE OR FALSE QUIZ ➗✖➖➕\n")
+
 # Ask user if they have played game before, if yes continue, if no display instructions
 played_before = choice_checker("~~Do you know how the quiz works?", yes_no_list, "~~Please enter yes or no~~")
 
@@ -109,9 +111,6 @@ if difficulty == "easy":
         # random integers for equation generators
         integer_1 = (random.randint(50, 100))
         integer_2 = (random.randint(50, 100))
-        integer_3 = (random.randint(75, 100))
-        integer_4 = (random.randint(75, 100))
-
         # randomizes questions so that it spread equally ( +, -, <, >)
         randomizer = random.randint(1, 60)
 
@@ -139,7 +138,7 @@ if difficulty == "easy":
             else:
                 user_choice = choice_checker(
                     f"round {rounds_played + 1} |"
-                    f" {integer_3} + {integer_4} > {integer_3 - 59} + {integer_4 - 57} "
+                    f" {integer_1} + {integer_2} > {random.randint(25, 49)} + {random.randint(25, 49)} "
                     f"(spoiler True) | True or false?", tf_list, tf_error)
                 rounds_played += 1
 
@@ -148,21 +147,21 @@ if difficulty == "easy":
             if 1 < randomizer < 20:
                 user_choice = choice_checker(
                     f"round {rounds_played + 1} |"
-                    f" {integer_1} + {integer_2} ={integer_4 + integer_3} (spoiler {equation})"
+                    f" {integer_1} + {integer_2} ={random.randint(0, 49)} (spoiler {equation})"
                     f"| True or False?", tf_list, tf_error)
                 rounds_played += 1
 
             elif 21 < randomizer < 40:
                 user_choice = choice_checker(
                     f"round {rounds_played + 1} | "
-                    f"{integer_1} - {integer_2} ={integer_3 - integer_4} (spoiler {equation})"
+                    f"{integer_1} - {integer_2} ={74, 255} (spoiler {equation})"
                     f"| True or False?", tf_list, tf_error)
                 rounds_played += 1
 
             else:
                 user_choice = choice_checker(
                     f"round {rounds_played + 1} | "
-                    f"{integer_3} + {integer_4} < {random.randint(50, 74)} + {random.randint(50, 74)}"
+                    f"{integer_2} + {integer_1} < {random.randint(20, 44)} + {random.randint(19, 58)}"
                     f" (spoiler {equation})"
                     f"| True or False?", tf_list, tf_error)
                 rounds_played += 1
@@ -209,7 +208,7 @@ if difficulty == "easy":
                 mode = "infinite"
                 continue
             else:
-                print(end_game_message.format(rounds_won,rounds_lost))
+                print(end_game_message.format(rounds_won, rounds_lost))
                 end_game = "yes"
                 break
 
@@ -261,8 +260,6 @@ if difficulty == "medium":
             print(incorrect.format(rounds_won, rounds_lost + 1))
             print("==========================================\n")
             rounds_lost += 1
-            continue
-
         # ends game if user does not wish to play again
         if rounds_played == rounds:
             play_again = choice_checker(play_again, yes_no_list, yes_no_error)
@@ -324,13 +321,13 @@ if difficulty == "hard":
             print(incorrect.format(rounds_won, rounds_lost + 1))
             print("==========================================\n")
             rounds_lost += 1
-            continue
 
         # ends game if user does not wish to play again, if they do, continue to infinite mode.
         if rounds_played == rounds:
             play_again = choice_checker(play_again, yes_no_list, yes_no_error)
             if play_again == "yes":
                 mode = "infinite"
+                rounds = "unlimited"
                 continue
             else:
                 print("\n", end_game_message.format(rounds_won, rounds_lost))
